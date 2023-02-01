@@ -1,7 +1,6 @@
 //import 'package:eddproject/backgroundcolor.dart';
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'reusablecard.dart';
 //import 'backgroundcolor.dart';
@@ -9,75 +8,30 @@ import 'reusablecard.dart';
 //
 //Text Color
 //
-List<Widget> textcolorList = <Widget>[
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: Colors.blueGrey,
-  ),
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: const Color(0xff52416e),
-  ),
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: const Color(0xff74a476),
-  ),
+List<Color> textcolorList = <Color>[
+  Colors.blueGrey,
+  const Color(0xff52416e),
+  const Color(0xff74a476),
 ];
-Widget dropdownValueText = textcolorList.first;
+Color dropdownValueText = textcolorList.first;
 //
 //Background Color
 //
-List<Widget> backgroundcolorList = <Widget>[
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: Colors.white,
-  ),
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: const Color(0xffd7d8dc),
-  ),
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: const Color(0xff7c1919),
-  ),
+List<Color> backgroundcolorList = <Color>[
+  Colors.white,
+  const Color(0xffd7d8dc),
+  const Color(0xff7c1919),
 ];
-Widget dropdownValueBackground = backgroundcolorList.first;
+Color dropdownValueBackground = backgroundcolorList.first;
 //
 //Accent Color 2
 //
-List<Widget> accentcolor2List = <Widget>[
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: Colors.indigo,
-  ),
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: Colors.purple,
-  ),
-  Container(
-    margin: const EdgeInsets.only(left: 5),
-    height: 15.0,
-    width: 70.0,
-    color: const Color(0x73635e5e),
-  ),
+List<Color> accentcolor2List = <Color>[
+  Colors.indigo,
+  Colors.purple,
+  const Color(0x73635e5e),
 ];
-Widget dropdownValueAccent2 = accentcolor2List.first;
+Color dropdownValueAccent2 = accentcolor2List.first;
 //
 //Accent Color
 //
@@ -89,15 +43,15 @@ List<Color> accentcolorList = <Color>[
 
 Color dropdownValueAccent1 = accentcolorList.first;
 
-int accentnumber = 0;
-int accent2number = 0;
+//int accentnumber = 0;
+//int accent2number = 0;
 //int backgroundnumber = 0;
-int textnumber = 0;
+//int textnumber = 0;
 
-Color accentcolor = Colors.green;
-Color accent2color = Colors.indigo;
+//Color accentcolor = Colors.green;
+//Color accent2color = Colors.indigo;
 //Color backgroundcolor = Colors.white;
-Color textcolor = Colors.blueGrey;
+//Color textcolor = Colors.blueGrey;
 //MaterialColor accentcolor1 = Colors.orange;
 //MaterialColor accentcolor2 = Colors.red;
 
@@ -123,27 +77,27 @@ class PersonalizationState extends ConsumerState<Personalization> {
     //
     //Accent Color
     //
-    if (accentnumber == 0) {
-      accentcolor = Colors.green;
-    }
-    if (accentnumber == 1) {
-      accentcolor = Colors.orange;
-    }
-    if (accentnumber == 2) {
-      accentcolor = Colors.red;
-    }
+//    if (accentnumber == 0) {
+//      accentcolor = Colors.green;
+//    }
+//    if (accentnumber == 1) {
+//      accentcolor = Colors.orange;
+//    }
+//    if (accentnumber == 2) {
+//      accentcolor = Colors.red;
+//    }
     //
     //Accent Color 2
     //
-    if (accent2number == 0) {
-      accent2color = Colors.indigo;
-    }
-    if (accent2number == 1) {
-      accent2color = Colors.purple;
-    }
-    if (accent2number == 2) {
-      accent2color = const Color(0x73635e5e);
-    }
+//    if (accent2number == 0) {
+//     accent2color = Colors.indigo;
+//    }
+//    if (accent2number == 1) {
+//      accent2color = Colors.purple;
+//    }
+//    if (accent2number == 2) {
+//      accent2color = const Color(0x73635e5e);
+//    }
     //
     //Background Color
     //
@@ -159,15 +113,15 @@ class PersonalizationState extends ConsumerState<Personalization> {
     //
     //Text Color
     //
-    if (textnumber == 0) {
-      textcolor = Colors.blueGrey;
-    }
-    if (textnumber == 1) {
-      textcolor = const Color(0xff52416e);
-    }
-    if (textnumber == 2) {
-      textcolor = const Color(0xff74a476);
-    }
+//    if (textnumber == 0) {
+//      textcolor = Colors.blueGrey;
+//    }
+//    if (textnumber == 1) {
+//      textcolor = const Color(0xff52416e);
+//    }
+//    if (textnumber == 2) {
+//      textcolor = const Color(0xff74a476);
+//    }
 
     return ReusableCard(
       settingTitle: 'Personalization',
@@ -222,18 +176,21 @@ class PersonalizationState extends ConsumerState<Personalization> {
               child: DropdownButton(
                 value: dropdownValueAccent2,
                 items: accentcolor2List
-                    .map<DropdownMenuItem<Widget>>((Widget value) {
-                  return DropdownMenuItem<Widget>(
+                    .map<DropdownMenuItem<Color>>((Color value) {
+                  return DropdownMenuItem<Color>(
                     value: value,
-                    child: value,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 5),
+                      height: 15.0,
+                      width: 70.0,
+                      color: value,
+                    ),
                   );
                 }).toList(),
-                onChanged: (Widget? value) {
+                onChanged: (Color? value) {
                   setState(() {
                     dropdownValueAccent2 = value!;
-                    accent2number =
-                        accentcolor2List.indexOf(dropdownValueAccent2);
-                    print('Accent2 $accent2number');
+                    ref.read(personalizationProvider).setAccent2Color(value);
                   });
                 },
               ),
@@ -250,18 +207,26 @@ class PersonalizationState extends ConsumerState<Personalization> {
                 child: DropdownButton(
                   value: dropdownValueBackground,
                   items: backgroundcolorList
-                      .map<DropdownMenuItem<Widget>>((Widget value) {
-                    return DropdownMenuItem<Widget>(
+                      .map<DropdownMenuItem<Color>>((Color value) {
+                    return DropdownMenuItem<Color>(
                       value: value,
-                      child: value,
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 5),
+                        height: 15.0,
+                        width: 70.0,
+                        color: value,
+                      ),
                     );
                   }).toList(),
-                  onChanged: (Widget? value) {
+                  onChanged: (Color? value) {
                     setState(() {
                       dropdownValueBackground = value!;
-                      BackgroundColorCalculator(
-                          backgroundnumber: backgroundcolorList
-                              .indexOf(dropdownValueBackground));
+                      ref
+                          .read(personalizationProvider)
+                          .setBackgroundColor(value);
+                      //BackgroundColorCalculator(
+                      //backgroundnumber: backgroundcolorList
+                      //.indexOf(dropdownValueBackground));
                       //backgroundnumber =
                       //    backgroundcolorList.indexOf(dropdownValueBackground);
                       //print('Background $backgroundnumber');
@@ -282,43 +247,47 @@ class PersonalizationState extends ConsumerState<Personalization> {
               child: DropdownButton(
                 value: dropdownValueText,
                 items:
-                    textcolorList.map<DropdownMenuItem<Widget>>((Widget value) {
-                  return DropdownMenuItem<Widget>(
+                    textcolorList.map<DropdownMenuItem<Color>>((Color value) {
+                  return DropdownMenuItem<Color>(
                     value: value,
-                    child: value,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 5),
+                      height: 15.0,
+                      width: 70.0,
+                      color: value,
+                    ),
                   );
                 }).toList(),
-                onChanged: (Widget? value) {
+                onChanged: (Color? value) {
                   setState(() {
                     dropdownValueText = value!;
-                    textnumber = textcolorList.indexOf(dropdownValueText);
-                    print('Text $textnumber');
+                    ref.read(personalizationProvider).setTextColor(value);
                   });
                 },
               ),
             ),
           ],
         ),
-        Container(
-          child: Text('$accentnumber'),
-          color: accentcolor,
-          width: 70.0,
-        ),
-        Container(
-          child: Text('$accent2number'),
-          color: accent2color,
-          width: 70.0,
-        ),
-        Container(
-          //child: Text('$backgroundnumber'),
-          //color: backgroundcolor,
-          width: 70.0,
-        ),
-        Container(
-          child: Text('$textnumber'),
-          color: textcolor,
-          width: 70.0,
-        ),
+        //Container(
+        //  child: Text('$accentnumber'),
+        //  color: accentcolor,
+        //  width: 70.0,
+        //),
+        //Container(
+        //  child: Text('$accent2number'),
+        //  color: accent2color,
+        //  width: 70.0,
+        //),
+        //Container(
+        //child: Text('$backgroundnumber'),
+        //color: backgroundcolor,
+        //width: 70.0,
+        //),
+        //Container(
+        //  child: Text('$textnumber'),
+        //  color: textcolor,
+        //  width: 70.0,
+        //),
       ]),
     );
   }

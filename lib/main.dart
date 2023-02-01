@@ -2,6 +2,7 @@
 // don't know if it is important
 import 'dart:html';
 
+import 'package:eddproject/providers.dart';
 import 'package:eddproject/shutoffdevice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -9,14 +10,17 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 //importing lib dart files
+import 'personalization_provider.dart';
+import 'providers.dart';
 import 'reusablecard.dart';
 import 'personalization.dart';
 import 'about.dart';
 import 'break.dart';
 import 'nightlight.dart';
 import 'eyebreak.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -38,14 +42,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 1,
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 color: Colors.black),
+            Container(
+                height: 50,
+                color: ref
+                    .watch(personalizationProvider)
+                    .accent2Color //.watch(personalizationProvider),
+                ),
           ],
         ));
   }
