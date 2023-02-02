@@ -3,15 +3,21 @@ import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'reusablecard.dart';
-//import 'backgroundcolor.dart';
 
+//import 'backgroundcolor.dart';
+//
+//
+//
+//
+//Changing the first color requires you to change the value of its
+//corresponding variable in personalization_provider
 //
 //Text Color
 //
 List<Color> textcolorList = <Color>[
-  Colors.blueGrey,
-  const Color(0xff52416e),
-  const Color(0xff74a476),
+  Colors.black,
+  Colors.grey.shade500,
+  Colors.green.shade700,
 ];
 Color dropdownValueText = textcolorList.first;
 //
@@ -19,17 +25,17 @@ Color dropdownValueText = textcolorList.first;
 //
 List<Color> backgroundcolorList = <Color>[
   Colors.white,
-  const Color(0xffd7d8dc),
-  const Color(0xff7c1919),
+  Colors.grey.shade700,
+  Colors.red.shade100,
 ];
 Color dropdownValueBackground = backgroundcolorList.first;
 //
 //Accent Color 2
 //
 List<Color> accentcolor2List = <Color>[
-  Colors.indigo,
+  Colors.grey,
   Colors.purple,
-  const Color(0x73635e5e),
+  Colors.grey.shade800,
 ];
 Color dropdownValueAccent2 = accentcolor2List.first;
 //
@@ -43,18 +49,6 @@ List<Color> accentcolorList = <Color>[
 
 Color dropdownValueAccent1 = accentcolorList.first;
 
-//int accentnumber = 0;
-//int accent2number = 0;
-//int backgroundnumber = 0;
-//int textnumber = 0;
-
-//Color accentcolor = Colors.green;
-//Color accent2color = Colors.indigo;
-//Color backgroundcolor = Colors.white;
-//Color textcolor = Colors.blueGrey;
-//MaterialColor accentcolor1 = Colors.orange;
-//MaterialColor accentcolor2 = Colors.red;
-
 class Personalization extends ConsumerStatefulWidget {
   const Personalization({Key? key}) : super(key: key);
 
@@ -65,64 +59,6 @@ class Personalization extends ConsumerStatefulWidget {
 class PersonalizationState extends ConsumerState<Personalization> {
   @override
   Widget build(BuildContext context) {
-    //changes the variable accentcolor based on what the value of accent number
-    //is which is in turn based on the index of the list value that is selected
-    //by the dropdownmenu
-    //the number accentnumber equals and color accentcolor equals needs to match
-    //the index number of the color in the list accentcolorList need to
-    //correspond to each other
-    //
-    //needs to be repeated for every dropdownmenu that will be used in the
-    //personalization tab
-    //
-    //Accent Color
-    //
-//    if (accentnumber == 0) {
-//      accentcolor = Colors.green;
-//    }
-//    if (accentnumber == 1) {
-//      accentcolor = Colors.orange;
-//    }
-//    if (accentnumber == 2) {
-//      accentcolor = Colors.red;
-//    }
-    //
-    //Accent Color 2
-    //
-//    if (accent2number == 0) {
-//     accent2color = Colors.indigo;
-//    }
-//    if (accent2number == 1) {
-//      accent2color = Colors.purple;
-//    }
-//    if (accent2number == 2) {
-//      accent2color = const Color(0x73635e5e);
-//    }
-    //
-    //Background Color
-    //
-//    if (backgroundnumber == 0) {
-//      backgroundcolor = Colors.white;
-//    }
-//    if (backgroundnumber == 1) {
-//      backgroundcolor = Color(0xffd7d8dc);
-//    }
-//   if (backgroundnumber == 2) {
-//      backgroundcolor = Color(0xff7c1919);
-//    }
-    //
-    //Text Color
-    //
-//    if (textnumber == 0) {
-//      textcolor = Colors.blueGrey;
-//    }
-//    if (textnumber == 1) {
-//      textcolor = const Color(0xff52416e);
-//    }
-//    if (textnumber == 2) {
-//      textcolor = const Color(0xff74a476);
-//    }
-
     return ReusableCard(
       settingTitle: 'Personalization',
       content: Column(children: [
@@ -224,12 +160,6 @@ class PersonalizationState extends ConsumerState<Personalization> {
                       ref
                           .read(personalizationProvider)
                           .setBackgroundColor(value);
-                      //BackgroundColorCalculator(
-                      //backgroundnumber: backgroundcolorList
-                      //.indexOf(dropdownValueBackground));
-                      //backgroundnumber =
-                      //    backgroundcolorList.indexOf(dropdownValueBackground);
-                      //print('Background $backgroundnumber');
                     });
                   },
                 )),
@@ -268,26 +198,6 @@ class PersonalizationState extends ConsumerState<Personalization> {
             ),
           ],
         ),
-        //Container(
-        //  child: Text('$accentnumber'),
-        //  color: accentcolor,
-        //  width: 70.0,
-        //),
-        //Container(
-        //  child: Text('$accent2number'),
-        //  color: accent2color,
-        //  width: 70.0,
-        //),
-        //Container(
-        //child: Text('$backgroundnumber'),
-        //color: backgroundcolor,
-        //width: 70.0,
-        //),
-        //Container(
-        //  child: Text('$textnumber'),
-        //  color: textcolor,
-        //  width: 70.0,
-        //),
       ]),
     );
   }

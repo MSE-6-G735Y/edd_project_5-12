@@ -9,9 +9,9 @@ class PersonalizationProvider extends ChangeNotifier {
   //gives each variable a default value because they needs it.
   PersonalizationProvider({
     this.accentColor = Colors.green,
-    this.accent2Color = Colors.indigo,
+    this.accent2Color = Colors.grey,
     this.backgroundColor = Colors.white,
-    this.textColor = Colors.blueGrey,
+    this.textColor = Colors.black,
   });
 
   void setAccentColor(Color newColor) {

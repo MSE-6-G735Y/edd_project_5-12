@@ -22,7 +22,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() => runApp(ProviderScope(child: MyApp()));
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -32,8 +38,14 @@ class MyApp extends StatelessWidget {
       // Application theme data, you can set the colors for the application as
       // you want
       theme: ThemeData(
+          //canvasColor: ref.watch(personalizationProvider).backgroundColor,
+          //BackgroundColor
+          scaffoldBackgroundColor:
+              ref.watch(personalizationProvider).backgroundColor,
           appBarTheme: AppBarTheme(
-              backgroundColor: Colors.white, shadowColor: Colors.white),
+              backgroundColor:
+                  ref.watch(personalizationProvider).backgroundColor,
+              shadowColor: ref.watch(personalizationProvider).backgroundColor),
           primarySwatch: Colors.blue,
           textTheme: TextTheme(headline1: TextStyle(color: Colors.black))),
       // A widget which will be started on application startup
@@ -58,7 +70,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           title: Text(
             'Settings',
             style: TextStyle(
-              color: Colors.black,
+              color: ref.watch(personalizationProvider).textColor,
             ),
           ),
           leading: Icon(
@@ -71,25 +83,62 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           children: [
             Container(
               height: 1.0,
-              color: Colors.black,
+              color: ref.watch(personalizationProvider).accent2Color,
               margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
             ),
             Break(),
+            Container(
+              height: 1.0,
+              color: ref.watch(personalizationProvider).accent2Color,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             ShutOffDeviceTile(),
+            Container(
+              height: 1.0,
+              color: ref.watch(personalizationProvider).accent2Color,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             NightLight(),
+            Container(
+              height: 1.0,
+              color: ref.watch(personalizationProvider).accent2Color,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             EyeBreak(),
+            Container(
+              height: 1.0,
+              color: ref.watch(personalizationProvider).accent2Color,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             Personalization(),
+            Container(
+              height: 1.0,
+              color: ref.watch(personalizationProvider).accent2Color,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             About(),
             Container(
                 height: 1,
                 margin: EdgeInsets.symmetric(horizontal: 20),
-                color: Colors.black),
+                color: ref.watch(personalizationProvider).accent2Color),
+            SizedBox(
+              height: 20,
+            ),
             Container(
                 height: 50,
                 color: ref
                     .watch(personalizationProvider)
-                    .accent2Color //.watch(personalizationProvider),
+                    .accentColor //.watch(personalizationProvider),
                 ),
+            Container(
+                height: 50,
+                color: ref.watch(personalizationProvider).accent2Color),
+            Container(
+                height: 50,
+                color: ref.watch(personalizationProvider).backgroundColor),
+            Container(
+                height: 50,
+                color: ref.watch(personalizationProvider).textColor),
           ],
         ));
   }
@@ -104,14 +153,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 //
 //
 //
-class ToggleSwitch extends StatefulWidget {
+class ToggleSwitch extends ConsumerStatefulWidget {
   const ToggleSwitch({super.key});
 
   @override
-  State<ToggleSwitch> createState() => _SwitchExampleState();
+  ConsumerState<ToggleSwitch> createState() => _SwitchExampleState();
 }
 
-class _SwitchExampleState extends State<ToggleSwitch> {
+class _SwitchExampleState extends ConsumerState<ToggleSwitch> {
   bool light = true;
 
   @override
@@ -119,7 +168,7 @@ class _SwitchExampleState extends State<ToggleSwitch> {
     return Switch(
       // This bool value toggles the switch.
       value: light,
-      activeColor: Colors.blue,
+      activeColor: ref.watch(personalizationProvider).accentColor,
       onChanged: (bool value) {
         // This is called when the user toggles the switch.
         setState(() {
