@@ -1,18 +1,10 @@
 // deleted: import 'dart:ffi';
 // don't know if it is important
-import 'dart:html';
 
 import 'package:eddproject/providers.dart';
 import 'package:eddproject/shutoffdevice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 //importing lib dart files
-import 'personalization_provider.dart';
-import 'providers.dart';
-import 'reusablecard.dart';
 import 'personalization.dart';
 import 'about.dart';
 import 'break.dart';

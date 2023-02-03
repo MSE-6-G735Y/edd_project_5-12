@@ -1,14 +1,9 @@
-import 'dart:html';
-
-import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
-import 'personalization_provider.dart';
 
 // class ReusableCard extends ConsumerStatefulWidget {
 //   ReusableCard({required this.settingTitle, required this.content});
