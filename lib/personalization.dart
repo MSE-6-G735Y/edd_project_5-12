@@ -42,7 +42,7 @@ Color dropdownValueAccent2 = accentcolor2List.first;
 //Accent Color
 //
 List<Color> accentcolorList = <Color>[
-  Colors.green,
+  Colors.blue,
   Colors.orange,
   Colors.red,
 ];
@@ -73,6 +73,7 @@ class PersonalizationState extends ConsumerState<Personalization> {
             child: DropdownButton<Color>(
               alignment: Alignment.centerRight,
               icon: Container(
+                color: ref.watch(personalizationProvider).accent2Color,
                 child: const Icon(Icons.arrow_drop_down),
                 alignment: Alignment.centerRight,
               ),

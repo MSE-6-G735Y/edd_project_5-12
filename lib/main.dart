@@ -46,7 +46,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               backgroundColor:
                   ref.watch(personalizationProvider).backgroundColor,
               shadowColor: ref.watch(personalizationProvider).backgroundColor),
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
           textTheme: TextTheme(headline1: TextStyle(color: Colors.black))),
       // A widget which will be started on application startup
       home: MyHomePage(),
