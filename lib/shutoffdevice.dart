@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'main.dart';
 import 'reusablecard.dart';
+import 'personalization_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ShutOffDeviceTile extends StatelessWidget {
   @override

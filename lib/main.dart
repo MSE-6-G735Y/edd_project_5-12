@@ -38,7 +38,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               backgroundColor:
                   ref.watch(personalizationProvider).backgroundColor,
               shadowColor: ref.watch(personalizationProvider).backgroundColor),
-          primarySwatch: Colors.red,
+          primarySwatch: Colors.blue,
           textTheme: TextTheme(headline1: TextStyle(color: Colors.black))),
       // A widget which will be started on application startup
       home: MyHomePage(),
@@ -65,7 +65,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               color: ref.watch(personalizationProvider).textColor,
             ),
           ),
-          leading: Icon(
+          leading: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
             size: 20.00,
@@ -116,21 +116,21 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             SizedBox(
               height: 20,
             ),
-            Container(
-                height: 50,
-                color: ref
-                    .watch(personalizationProvider)
-                    .accentColor //.watch(personalizationProvider),
-                ),
-            Container(
-                height: 50,
-                color: ref.watch(personalizationProvider).accent2Color),
-            Container(
-                height: 50,
-                color: ref.watch(personalizationProvider).backgroundColor),
-            Container(
-                height: 50,
-                color: ref.watch(personalizationProvider).textColor),
+            //Container(
+            //    height: 50,
+            //    color: ref
+            //        .watch(personalizationProvider)
+            //        .accentColor //.watch(personalizationProvider),
+            //    ),
+            //Container(
+            //    height: 50,
+            //    color: ref.watch(personalizationProvider).accent2Color),
+            //Container(
+            //    height: 50,
+            //    color: ref.watch(personalizationProvider).backgroundColor),
+            //Container(
+            //    height: 50,
+            //    color: ref.watch(personalizationProvider).textColor),
           ],
         ));
   }

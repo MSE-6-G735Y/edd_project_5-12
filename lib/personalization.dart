@@ -1,4 +1,3 @@
-
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,18 +62,22 @@ class PersonalizationState extends ConsumerState<Personalization> {
       settingTitle: 'Personalization',
       content: Column(children: [
         Row(children: [
-          const Expanded(
+          Expanded(
               child: SizedBox(
             height: 20,
-            child: Text('Accent Color'),
+            child: Text(
+              'Accent Color',
+              style: TextStyle(
+                  color: ref.watch(personalizationProvider).textColor),
+            ),
           )),
           SizedBox(
             height: 40,
             child: DropdownButton<Color>(
               alignment: Alignment.centerRight,
               icon: Container(
-                color: ref.watch(personalizationProvider).accent2Color,
-                child: const Icon(Icons.arrow_drop_down),
+                child: Icon(Icons.arrow_drop_down,
+                    color: ref.watch(personalizationProvider).accent2Color),
                 alignment: Alignment.centerRight,
               ),
               //what the value of the dropdownbutton is
@@ -106,11 +109,20 @@ class PersonalizationState extends ConsumerState<Personalization> {
         Row(
           children: [
             Expanded(
-              child: Container(child: Text('Accent Color 2')),
+              child: Container(
+                  child: Text(
+                'Accent Color 2',
+                style: TextStyle(
+                    color: ref.watch(personalizationProvider).textColor),
+              )),
             ),
             Container(
               height: 40,
               child: DropdownButton(
+                icon: Container(
+                  child: Icon(Icons.arrow_drop_down,
+                      color: ref.watch(personalizationProvider).accent2Color),
+                ),
                 value: dropdownValueAccent2,
                 items: accentcolor2List
                     .map<DropdownMenuItem<Color>>((Color value) {
@@ -136,12 +148,20 @@ class PersonalizationState extends ConsumerState<Personalization> {
         ),
         Row(
           children: [
-            const Expanded(
-              child: Text('Background Color'),
+            Expanded(
+              child: Text(
+                'Background Color',
+                style: TextStyle(
+                    color: ref.watch(personalizationProvider).textColor),
+              ),
             ),
             SizedBox(
                 height: 40,
                 child: DropdownButton(
+                  icon: Container(
+                    child: Icon(Icons.arrow_drop_down,
+                        color: ref.watch(personalizationProvider).accent2Color),
+                  ),
                   value: dropdownValueBackground,
                   items: backgroundcolorList
                       .map<DropdownMenuItem<Color>>((Color value) {
@@ -170,12 +190,20 @@ class PersonalizationState extends ConsumerState<Personalization> {
           children: [
             Expanded(
               child: Container(
-                child: Text('Text Color'),
+                child: Text(
+                  'Text Color',
+                  style: TextStyle(
+                      color: ref.watch(personalizationProvider).textColor),
+                ),
               ),
             ),
             Container(
               height: 40,
               child: DropdownButton(
+                icon: Container(
+                  child: Icon(Icons.arrow_drop_down,
+                      color: ref.watch(personalizationProvider).accent2Color),
+                ),
                 value: dropdownValueText,
                 items:
                     textcolorList.map<DropdownMenuItem<Color>>((Color value) {
