@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +47,17 @@ class BreakState extends ConsumerState<Break> {
                   height: 30,
                   //color: Colors.green,
                   child: TextField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
+                    ],
+                    onSubmitted: (value) {
+                      print('Frequency: $value');
+                      int timerValue = int.parse(value);
+                      Timer((Duration(seconds: timerValue)), () {
+                        print('$timerValue');
+                      });
+                    },
+
                     // inputFormatters: [
                     //   FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
                     // ],
