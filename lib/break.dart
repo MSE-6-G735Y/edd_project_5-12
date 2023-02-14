@@ -1,4 +1,5 @@
 import 'dart:async';
+// import 'dart:ffi';
 
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class Break extends ConsumerStatefulWidget {
 }
 
 class BreakState extends ConsumerState<Break> {
+  int duration = 0;
+  bool isBreakActive = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,9 +55,14 @@ class BreakState extends ConsumerState<Break> {
                     ],
                     onSubmitted: (value) {
                       print('Frequency: $value');
-                      int timerValue = int.parse(value);
-                      Timer((Duration(seconds: timerValue)), () {
-                        print('$timerValue');
+                      int frequency = int.parse(value);
+                      Timer.periodic((Duration(seconds: frequency)), (timer) {
+                        print('$frequency');
+                        print('break started');
+
+                        Timer((Duration(seconds: duration)), () {
+                          print('break over');
+                        });
                       });
                     },
 
@@ -99,6 +107,14 @@ class BreakState extends ConsumerState<Break> {
                   height: 30,
                   //color: Colors.green,
                   child: TextField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
+                    ],
+                    onSubmitted: (value) {
+                      int durationValue = int.parse(value);
+                      duration = durationValue;
+                      print('$duration');
+                    },
                     // onChanged: (text) {
                     //   valueD = text;
                     //   print('Duration: $valueD');
@@ -134,8 +150,10 @@ class BreakState extends ConsumerState<Break> {
                 //   width: 50,
                 //   alignment: Alignment.center,
                 //   child: ElevatedButton(
-                //     style: ElevatedButton.styleFrom(primary: ),
-                //     onPressed: () {},
+                //     style: ElevatedButton.styleFrom(primary: Colors.green),
+                //     onPressed: () {
+
+                //     },
                 //     child: Icon(Icons.add,
                 //         color: ref.watch(personalizationProvider).accent2Color),
                 //   ),
@@ -159,13 +177,13 @@ class BreakState extends ConsumerState<Break> {
 }
 
 // class BreakTimer {
-//   // int frequencyValue;
-//   // int durationValue;
+//   int frequencyValue;
+//   int durationValue;
 
-//   // BreakTimer({this.frequencyValue = 0, this.durationValue = 0});
+//   BreakTimer({this.frequencyValue = 0, this.durationValue = 0});
 //   void main() {
-//     Timer(Duration(seconds: 2), () {
-//       print('2');
+//     Timer(Duration(seconds: frequencyValue), () {
+//       print('$frequencyValue');
 //     });
 //   }
 // }
