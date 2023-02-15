@@ -24,6 +24,7 @@ class Break extends ConsumerStatefulWidget {
 class BreakState extends ConsumerState<Break> {
   int duration = 0;
   bool isBreakActive = false;
+  bool isBreakOn = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,10 +57,14 @@ class BreakState extends ConsumerState<Break> {
                     onSubmitted: (value) {
                       print('Frequency: $value');
                       int frequency = int.parse(value);
+
                       Timer.periodic((Duration(seconds: frequency)), (timer) {
-                        print('$frequency');
+                        // print('$frequency');
                         print('break started');
 
+                        // Future.delayed(Duration(seconds: duration), () {
+                        //   print('');
+                        // });
                         Timer((Duration(seconds: duration)), () {
                           print('break over');
                         });
@@ -113,7 +118,7 @@ class BreakState extends ConsumerState<Break> {
                     onSubmitted: (value) {
                       int durationValue = int.parse(value);
                       duration = durationValue;
-                      print('$duration');
+                      print('Duration: $duration');
                     },
                     // onChanged: (text) {
                     //   valueD = text;
