@@ -23,8 +23,8 @@ class Break extends ConsumerStatefulWidget {
 
 class BreakState extends ConsumerState<Break> {
   int duration = 0;
-  bool isBreakActive = false;
-  bool isBreakOn = true;
+  bool isBreakOn = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,21 +54,34 @@ class BreakState extends ConsumerState<Break> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
                     ],
-                    onSubmitted: (value) {
+                    onSubmitted: (value) async {
                       print('Frequency: $value');
                       int frequency = int.parse(value);
-
-                      Timer.periodic((Duration(seconds: frequency)), (timer) {
-                        // print('$frequency');
+                      while (isBreakOn = true) {
+                        await Future.delayed(Duration(seconds: frequency));
                         print('break started');
+                        await Future.delayed(Duration(seconds: duration));
+                        print('break over');
+                      }
+                      // while (true) {
+                      //   Future.delayed(Duration(seconds: frequency), () {
+                      //     print('break started');
+                      //   });
+                      //   Future.delayed(Duration(seconds: duration), () {
+                      //     print('break over');
+                      //   });
+                      // }
+                      // Timer.periodic((Duration(seconds: frequency)), (timer) {
+                      //   print('$frequency');
+                      //   print('break started');
 
-                        // Future.delayed(Duration(seconds: duration), () {
-                        //   print('');
-                        // });
-                        Timer((Duration(seconds: duration)), () {
-                          print('break over');
-                        });
-                      });
+                      //   // Future.delayed(Duration(seconds: duration), () {
+                      //   //   print('');
+                      //   // });
+                      //   Timer((Duration(seconds: duration)), () {
+                      //     print('break over');
+                      //   });
+                      // });
                     },
 
                     // inputFormatters: [
@@ -138,6 +151,26 @@ class BreakState extends ConsumerState<Break> {
                 )
               ],
             ),
+            Container(
+              child: Switch(
+                  value: isBreakOn,
+                  onChanged: (value) {
+                    setState(() {
+                      isBreakOn = value;
+                    });
+                    print('$isBreakOn');
+                  }),
+              // child: ElevatedButton(
+              //     child: Text('Stop Break'),
+              //     onPressed: () {
+              //       print('$isBreakActive');
+              //       if (isBreakActive = false) {
+              //         isBreakActive = true;
+              //       } else {
+              //         isBreakActive = false;
+              //       }
+              //     }),
+            ),
             Row(
               children: [
                 Expanded(
@@ -150,6 +183,11 @@ class BreakState extends ConsumerState<Break> {
                                 ref.watch(personalizationProvider).textColor)),
                   ),
                 ),
+                Container(
+                    height: 20,
+                    width: 20,
+                    child: Icon(Icons.add,
+                        color: ref.watch(personalizationProvider).accent2Color))
                 // Container(
                 //   height: 30,
                 //   width: 50,
