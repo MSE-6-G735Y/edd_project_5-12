@@ -11,6 +11,7 @@ import 'break.dart';
 import 'nightlight.dart';
 import 'eyebreak.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() => runApp(ProviderScope(child: MyApp()));
 

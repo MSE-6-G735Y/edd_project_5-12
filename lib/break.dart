@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+
 import 'dart:async';
 // import 'dart:ffi';
 
@@ -10,6 +12,9 @@ import 'package:flutter/widgets.dart';
 import 'reusablecard.dart';
 import 'personalization_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+List<Widget> specificBreaks = [];
 
 TextEditingController textControllerF = TextEditingController();
 TextEditingController textControllerD = TextEditingController();
@@ -56,13 +61,49 @@ class BreakState extends ConsumerState<Break> {
                     ],
                     onSubmitted: (value) async {
                       print('Frequency: $value');
+                      print('$isBreakOn');
                       int frequency = int.parse(value);
+                      // BreakTimer(
+                      //     frequencyValue: frequency,
+                      //     durationValue: duration,
+                      //     isBreakOn: isBreakOn);
                       while (isBreakOn = true) {
                         await Future.delayed(Duration(seconds: frequency));
                         print('break started');
+                        //
+                        FlutterLocalNotificationsPlugin
+                            flutterLocalNotificationsPlugin =
+                            FlutterLocalNotificationsPlugin();
+                        flutterLocalNotificationsPlugin
+                            .resolvePlatformSpecificImplementation<
+                                AndroidFlutterLocalNotificationsPlugin>()
+                            ?.requestPermission();
+                        //
+                        const AndroidNotificationDetails
+                            androidNotificationDetails =
+                            AndroidNotificationDetails(
+                                'your channel id', 'your channel name',
+                                channelDescription: 'your channel description',
+                                importance: Importance.max,
+                                priority: Priority.high,
+                                ticker: 'ticker');
+                        const NotificationDetails notificationDetails =
+                            NotificationDetails(
+                                android: androidNotificationDetails);
+                        await flutterLocalNotificationsPlugin.show(0,
+                            'Break Started', 'plain body', notificationDetails,
+                            payload: 'item x');
+                        //
                         await Future.delayed(Duration(seconds: duration));
                         print('break over');
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                                title: Text('Your Break has Ended')));
                       }
+                      //
+                      //
+                      //
                       // while (true) {
                       //   Future.delayed(Duration(seconds: frequency), () {
                       //     print('break started');
@@ -171,6 +212,8 @@ class BreakState extends ConsumerState<Break> {
               //       }
               //     }),
             ),
+            //Container(child: ),
+            Column(children: specificBreaks),
             Row(
               children: [
                 Expanded(
@@ -184,10 +227,96 @@ class BreakState extends ConsumerState<Break> {
                   ),
                 ),
                 Container(
-                    height: 20,
-                    width: 20,
-                    child: Icon(Icons.add,
-                        color: ref.watch(personalizationProvider).accent2Color))
+                    // height: 20,
+                    // width: 20,
+                    child: IconButton(
+                  alignment: Alignment.center,
+                  onPressed: () {
+                    setState(() {
+                      //Adding specific breaks to a list, need way to remove specific breaks and make them function
+                      specificBreaks.add(Container(
+                        //color: Colors.blue,
+                        margin: EdgeInsets.only(left: 20),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 30,
+                                    child: Text('Break 1'),
+                                  ),
+                                ),
+                                Container(
+                                  width: 50,
+                                  height: 20,
+                                  child: Row(children: [
+                                    Container(
+                                        width: 17,
+                                        height: 10,
+                                        child: TextField()),
+                                    Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 1),
+                                        child: Text(':')),
+                                    Container(
+                                      child: TextField(),
+                                      width: 25,
+                                      height: 10,
+                                    )
+                                  ]),
+                                  //color: Colors.pink,
+                                )
+                              ],
+                            ),
+                            Row(children: [
+                              Expanded(
+                                child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 30,
+                                    child: Text('Duration 1')),
+                              ),
+                              Container(
+                                  //alignment: Alignment.centerLeft,
+                                  width: 80,
+                                  height: 30,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        color: ref
+                                            .watch(personalizationProvider)
+                                            .textColor),
+                                    cursorColor: ref
+                                        .watch(personalizationProvider)
+                                        .textColor,
+                                    decoration: InputDecoration(
+                                        hintText: 'minutes',
+                                        hintStyle: TextStyle(
+                                            color: ref
+                                                .watch(personalizationProvider)
+                                                .accent2Color)),
+                                  ))
+                            ]),
+                            SizedBox(
+                              height: 20,
+                            )
+                          ],
+                        ),
+                      )
+                          //   Container(
+                          //   height: 10,
+                          //   width: 10,
+                          //   color: Colors.blue,
+                          //   child: Text('1'),
+                          // )
+                          );
+                    });
+
+                    print(specificBreaks);
+                  },
+                  icon: Icon(Icons.add,
+                      color: ref.watch(personalizationProvider).accent2Color),
+                ))
                 // Container(
                 //   height: 30,
                 //   width: 50,
@@ -230,3 +359,23 @@ class BreakState extends ConsumerState<Break> {
 //     });
 //   }
 // }
+
+class BreakTimer {
+  int frequencyValue;
+  int durationValue;
+  bool isBreakOn;
+
+  BreakTimer(
+      {this.frequencyValue = 0,
+      this.durationValue = 0,
+      this.isBreakOn = false});
+  void main() async {
+    print(isBreakOn);
+    while (isBreakOn = true) {
+      await Future.delayed(Duration(seconds: frequencyValue));
+      print('break started');
+      await Future.delayed(Duration(seconds: durationValue));
+      print('break over');
+    }
+  }
+}
