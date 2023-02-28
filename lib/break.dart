@@ -29,6 +29,43 @@ class Break extends ConsumerStatefulWidget {
 class BreakState extends ConsumerState<Break> {
   int duration = 0;
   bool isBreakOn = false;
+  int frequency = 0;
+
+  void timer() async {
+    while (isBreakOn) {
+      await Future.delayed(Duration(seconds: frequency));
+      print('break started');
+      //
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+          FlutterLocalNotificationsPlugin();
+      flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestPermission();
+      //
+      const AndroidNotificationDetails androidNotificationDetails =
+          AndroidNotificationDetails('your channel id', 'your channel name',
+              channelDescription: 'your channel description',
+              importance: Importance.max,
+              priority: Priority.high,
+              ticker: 'ticker');
+      const NotificationDetails notificationDetails =
+          NotificationDetails(android: androidNotificationDetails);
+      await flutterLocalNotificationsPlugin.show(
+          0,
+          'Your $duration Minute has Break Started',
+          'plain body',
+          notificationDetails,
+          payload: 'item x');
+      //
+      await Future.delayed(Duration(seconds: duration));
+      print('break over');
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(title: Text('Your Break has Ended')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,48 +99,50 @@ class BreakState extends ConsumerState<Break> {
                     onSubmitted: (value) async {
                       print('Frequency: $value');
                       print('$isBreakOn');
-                      int frequency = int.parse(value);
+                      int frequencyValue = int.parse(value);
+                      frequency = frequencyValue;
+                      timer();
                       // BreakTimer(
                       //     frequencyValue: frequency,
                       //     durationValue: duration,
                       //     isBreakOn: isBreakOn);
-                      while (isBreakOn = true) {
-                        await Future.delayed(Duration(seconds: frequency));
-                        print('break started');
-                        //
-                        FlutterLocalNotificationsPlugin
-                            flutterLocalNotificationsPlugin =
-                            FlutterLocalNotificationsPlugin();
-                        flutterLocalNotificationsPlugin
-                            .resolvePlatformSpecificImplementation<
-                                AndroidFlutterLocalNotificationsPlugin>()
-                            ?.requestPermission();
-                        //
-                        const AndroidNotificationDetails
-                            androidNotificationDetails =
-                            AndroidNotificationDetails(
-                                'your channel id', 'your channel name',
-                                channelDescription: 'your channel description',
-                                importance: Importance.max,
-                                priority: Priority.high,
-                                ticker: 'ticker');
-                        const NotificationDetails notificationDetails =
-                            NotificationDetails(
-                                android: androidNotificationDetails);
-                        await flutterLocalNotificationsPlugin.show(
-                            0,
-                            'Your $duration Minute has Break Started',
-                            'plain body',
-                            notificationDetails,
-                            payload: 'item x');
-                        //
-                        await Future.delayed(Duration(seconds: duration));
-                        print('break over');
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                                title: Text('Your Break has Ended')));
-                      }
+                      // while (isBreakOn) {
+                      //   await Future.delayed(Duration(seconds: frequency));
+                      //   print('break started');
+                      //   //
+                      //   FlutterLocalNotificationsPlugin
+                      //       flutterLocalNotificationsPlugin =
+                      //       FlutterLocalNotificationsPlugin();
+                      //   flutterLocalNotificationsPlugin
+                      //       .resolvePlatformSpecificImplementation<
+                      //           AndroidFlutterLocalNotificationsPlugin>()
+                      //       ?.requestPermission();
+                      //   //
+                      //   const AndroidNotificationDetails
+                      //       androidNotificationDetails =
+                      //       AndroidNotificationDetails(
+                      //           'your channel id', 'your channel name',
+                      //           channelDescription: 'your channel description',
+                      //           importance: Importance.max,
+                      //           priority: Priority.high,
+                      //           ticker: 'ticker');
+                      //   const NotificationDetails notificationDetails =
+                      //       NotificationDetails(
+                      //           android: androidNotificationDetails);
+                      //   await flutterLocalNotificationsPlugin.show(
+                      //       0,
+                      //       'Your $duration Minute has Break Started',
+                      //       'plain body',
+                      //       notificationDetails,
+                      //       payload: 'item x');
+                      //   //
+                      //   await Future.delayed(Duration(seconds: duration));
+                      //   print('break over');
+                      //   showDialog(
+                      //       context: context,
+                      //       builder: (BuildContext context) => AlertDialog(
+                      //           title: Text('Your Break has Ended')));
+                      // }
                       //
                       //
                       //
@@ -203,6 +242,7 @@ class BreakState extends ConsumerState<Break> {
                       isBreakOn = value;
                     });
                     print('$isBreakOn');
+                    timer();
                   }),
               // child: ElevatedButton(
               //     child: Text('Stop Break'),
@@ -363,22 +403,22 @@ class BreakState extends ConsumerState<Break> {
 //   }
 // }
 
-class BreakTimer {
-  int frequencyValue;
-  int durationValue;
-  bool isBreakOn;
+// class BreakTimer {
+//   int frequencyValue;
+//   int durationValue;
+//   bool isBreakOn;
 
-  BreakTimer(
-      {this.frequencyValue = 0,
-      this.durationValue = 0,
-      this.isBreakOn = false});
-  void main() async {
-    print(isBreakOn);
-    while (isBreakOn = true) {
-      await Future.delayed(Duration(seconds: frequencyValue));
-      print('break started');
-      await Future.delayed(Duration(seconds: durationValue));
-      print('break over');
-    }
-  }
-}
+//   BreakTimer(
+//       {this.frequencyValue = 0,
+//       this.durationValue = 0,
+//       this.isBreakOn = false});
+//   void main() async {
+//     print(isBreakOn);
+//     while (isBreakOn) {
+//       await Future.delayed(Duration(seconds: frequencyValue));
+//       print('break started');
+//       await Future.delayed(Duration(seconds: durationValue));
+//       print('break over');
+//     }
+//   }
+// }

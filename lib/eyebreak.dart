@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/services.dart';
 
 TextEditingController eyeBreakDuration = TextEditingController();
+bool eyeBreakActive = true;
 
 //
 class EyeBreak extends ConsumerStatefulWidget {
@@ -36,6 +39,16 @@ class EyeBreakState extends ConsumerState<EyeBreak> {
                   width: 80,
                   height: 20,
                   child: TextField(
+                    onSubmitted: (value) async {
+                      print('$value');
+                      int frequency = int.parse(value);
+                      while (eyeBreakActive) {
+                        await Future.delayed(Duration(seconds: frequency));
+                        print('Eye break started');
+                        await Future.delayed(Duration(seconds: 20));
+                        print('Eye break ended');
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
                     ],
