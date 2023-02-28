@@ -4,6 +4,13 @@ import 'reusablecard.dart';
 import 'main.dart';
 import 'personalization_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
+
+TextEditingController startHr = TextEditingController();
+TextEditingController startMin = TextEditingController();
+TextEditingController endHr = TextEditingController();
+TextEditingController endMin = TextEditingController();
 
 class NightLight extends ConsumerStatefulWidget {
   const NightLight({Key? key}) : super(key: key);
@@ -40,6 +47,11 @@ class NightLightState extends ConsumerState<NightLight> {
                       width: 15,
                       height: 10,
                       child: TextField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        controller: startHr,
                         style: TextStyle(
                             color:
                                 ref.watch(personalizationProvider).textColor),
@@ -55,6 +67,11 @@ class NightLightState extends ConsumerState<NightLight> {
                                   .accent2Color))),
                   Container(
                     child: TextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0123456789]'))
+                      ],
+                      controller: startMin,
                       style: TextStyle(
                           color: ref.watch(personalizationProvider).textColor),
                       cursorColor: ref.watch(personalizationProvider).textColor,
@@ -77,6 +94,11 @@ class NightLightState extends ConsumerState<NightLight> {
                       width: 15,
                       height: 10,
                       child: TextField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        controller: endHr,
                         style: TextStyle(
                             color:
                                 ref.watch(personalizationProvider).textColor),
@@ -92,6 +114,11 @@ class NightLightState extends ConsumerState<NightLight> {
                                   .accent2Color))),
                   Container(
                     child: TextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0123456789]'))
+                      ],
+                      controller: endMin,
                       style: TextStyle(
                           color: ref.watch(personalizationProvider).textColor),
                       cursorColor: ref.watch(personalizationProvider).textColor,

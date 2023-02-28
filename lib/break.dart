@@ -90,8 +90,11 @@ class BreakState extends ConsumerState<Break> {
                         const NotificationDetails notificationDetails =
                             NotificationDetails(
                                 android: androidNotificationDetails);
-                        await flutterLocalNotificationsPlugin.show(0,
-                            'Break Started', 'plain body', notificationDetails,
+                        await flutterLocalNotificationsPlugin.show(
+                            0,
+                            'Your $duration Minute has Break Started',
+                            'plain body',
+                            notificationDetails,
                             payload: 'item x');
                         //
                         await Future.delayed(Duration(seconds: duration));

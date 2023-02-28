@@ -85,7 +85,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               color: ref.watch(personalizationProvider).accent2Color,
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
-            ShutOffDeviceTile(),
+            ShutOffDevice(),
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,

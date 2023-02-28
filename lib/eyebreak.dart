@@ -1,11 +1,15 @@
-
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'reusablecard.dart';
 import 'personalization_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/services.dart';
 
+TextEditingController eyeBreakDuration = TextEditingController();
+
+//
 class EyeBreak extends ConsumerStatefulWidget {
   const EyeBreak({Key? key}) : super(key: key);
 
@@ -32,12 +36,16 @@ class EyeBreakState extends ConsumerState<EyeBreak> {
                   width: 80,
                   height: 20,
                   child: TextField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
+                    ],
+                    controller: eyeBreakDuration,
                     style: TextStyle(
                         color: ref.watch(personalizationProvider).textColor),
                     cursorColor: ref.watch(personalizationProvider).textColor,
                     decoration: InputDecoration(
-                        labelText: 'Time(min)',
-                        labelStyle: TextStyle(
+                        hintText: 'minutes',
+                        hintStyle: TextStyle(
                             color: ref
                                 .watch(personalizationProvider)
                                 .accent2Color)),
