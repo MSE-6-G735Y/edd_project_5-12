@@ -1,9 +1,4 @@
-import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'main.dart';
 
 // class ReusableCard extends ConsumerStatefulWidget {
@@ -16,7 +11,7 @@ import 'main.dart';
 // }
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({required this.settingTitle, required this.content});
+  ReusableCard({super.key, required this.settingTitle, required this.content});
   //String settingTitle;
   //
   String settingTitle;
@@ -25,7 +20,7 @@ class ReusableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           width: double.infinity,
           //color: Colors.blue,
           child: Row(children: [
@@ -37,19 +32,19 @@ class ReusableCard extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   //height: 90,
                   //color: Colors.blue,
-                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                   child: content,
                 )
               ],
               title: Text(
                 settingTitle,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ))),
             Container(
               alignment: Alignment.topRight,
               width: 50.0,
-              child: ToggleSwitch(),
+              child: const ToggleSwitch(),
             )
           ])),
       // Container(

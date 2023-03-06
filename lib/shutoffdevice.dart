@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'main.dart';
 import 'reusablecard.dart';
-import 'personalization_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:async';
 import 'package:flutter/services.dart';
 import 'providers.dart';
 
@@ -35,506 +30,504 @@ class ShutOffDevice extends ConsumerStatefulWidget {
 class ShutOffDeviceState extends ConsumerState<ShutOffDevice> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ReusableCard(
-          settingTitle: 'Shut Off Device',
-          content: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Sunday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: sundayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
+    return ReusableCard(
+        settingTitle: 'Shut Off Device',
+        content: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Sunday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
+                        height: 10,
                         //
                         //
                         //
                         child: TextField(
-                          controller: sundayMin,
+                          controller: sundayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: sundayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            ),
+            //
+            //
+            //
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Monday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
                         height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              ),
-              //
-              //
-              //
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Monday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: mondayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
                         //
                         //
                         //
                         child: TextField(
-                          controller: mondayMin,
+                          controller: mondayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: mondayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            ),
+            //
+            //
+            //
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Tuesday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
                         height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              ),
-              //
-              //
-              //
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Tuesday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: tuesdayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
                         //
                         //
                         //
                         child: TextField(
-                          controller: tuesdayMin,
+                          controller: tuesdayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: tuesdayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            ),
+            //
+            //
+            //
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Wednesday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
                         height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              ),
-              //
-              //
-              //
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Wednesday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: wednesdayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
                         //
                         //
                         //
                         child: TextField(
-                          controller: wednesdayMin,
+                          controller: wednesdayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: wednesdayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            ),
+            //
+            //
+            //
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Thursday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
                         height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              ),
-              //
-              //
-              //
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Thursday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: thurdayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
                         //
                         //
                         //
                         child: TextField(
-                          controller: thursdayMin,
+                          controller: thurdayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: thursdayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            ),
+            //
+            //
+            //
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Friday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
                         height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              ),
-              //
-              //
-              //
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Friday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: fridayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
                         //
                         //
                         //
                         child: TextField(
-                          controller: fridayMin,
+                          controller: fridayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: fridayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            ),
+            //
+            //
+            //
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text('Saturday'))),
+                const SizedBox(
+                  child: ToggleSwitch(),
+                  width: 60,
+                  //color: Colors.amber,
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 20,
+                  child: Row(children: [
+                    SizedBox(
+                        width: 17,
                         height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              ),
-              //
-              //
-              //
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Saturday'))),
-                  Container(
-                    child: ToggleSwitch(),
-                    width: 60,
-                    //color: Colors.amber,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Row(children: [
-                      Container(
-                          width: 17,
-                          height: 10,
-                          //
-                          //
-                          //
-                          child: TextField(
-                            controller: saturdayHr,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0123456789]'))
-                            ],
-                            style: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .textColor),
-                            cursorColor:
-                                ref.watch(personalizationProvider).textColor,
-                          )),
-                      //
-                      //
-                      //
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Text(':')),
-                      Container(
                         //
                         //
                         //
                         child: TextField(
-                          controller: saturdayMin,
+                          controller: saturdayHr,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0123456789]'))
                           ],
                           style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .textColor),
                           cursorColor:
                               ref.watch(personalizationProvider).textColor,
-                        ),
-                        //
-                        //
-                        //
-                        width: 25,
-                        height: 10,
-                      )
-                    ]),
-                    //color: Colors.pink,
-                  )
-                ],
-              )
-            ],
-          )),
-    );
+                        )),
+                    //
+                    //
+                    //
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: const Text(':')),
+                    SizedBox(
+                      //
+                      //
+                      //
+                      child: TextField(
+                        controller: saturdayMin,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0123456789]'))
+                        ],
+                        style: TextStyle(
+                            color:
+                                ref.watch(personalizationProvider).textColor),
+                        cursorColor:
+                            ref.watch(personalizationProvider).textColor,
+                      ),
+                      //
+                      //
+                      //
+                      width: 25,
+                      height: 10,
+                    )
+                  ]),
+                  //color: Colors.pink,
+                )
+              ],
+            )
+          ],
+        ));
   }
 }
 
 class ShutOffDeviceTile extends StatelessWidget {
-  ShutOffDeviceTile({required this.day});
+  ShutOffDeviceTile({super.key, required this.day});
 
   String day;
 
@@ -545,19 +538,19 @@ class ShutOffDeviceTile extends StatelessWidget {
         Expanded(
             child:
                 Container(alignment: Alignment.centerLeft, child: Text(day))),
-        Container(
+        const SizedBox(
           child: ToggleSwitch(),
           width: 60,
           //color: Colors.amber,
         ),
-        Container(
+        SizedBox(
           width: 50,
           height: 20,
           child: Row(children: [
-            Container(width: 17, height: 10, child: TextField()),
+            const SizedBox(width: 17, height: 10, child: TextField()),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 1), child: Text(':')),
-            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 1), child: const Text(':')),
+            const SizedBox(
               child: TextField(),
               width: 25,
               height: 10,

@@ -1,18 +1,17 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
 
 import 'dart:async';
+
+import 'package:eddproject/main.dart';
 // import 'dart:ffi';
 
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'reusablecard.dart';
-import 'personalization_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'reusablecard.dart';
 
 List<Widget> specificBreaks = [];
 
@@ -36,28 +35,18 @@ class BreakState extends ConsumerState<Break> {
       await Future.delayed(Duration(seconds: frequency));
       print('break started');
       //
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-          FlutterLocalNotificationsPlugin();
-      flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
-          ?.requestPermission();
-      //
-      const AndroidNotificationDetails androidNotificationDetails =
-          AndroidNotificationDetails('your channel id', 'your channel name',
-              channelDescription: 'your channel description',
-              importance: Importance.max,
-              priority: Priority.high,
-              ticker: 'ticker');
-      const NotificationDetails notificationDetails =
-          NotificationDetails(android: androidNotificationDetails);
-      await flutterLocalNotificationsPlugin.show(
-          0,
-          'Your $duration Minute has Break Started',
-          'plain body',
-          notificationDetails,
+
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'your channel id', 'your channel name',
+          channelDescription: 'your channel description',
+          importance: Importance.max,
+          priority: Priority.high,
+          ticker: 'ticker');
+      var platformChannelSpecifics =
+          NotificationDetails(android: androidPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.show(0, 'Your break has started',
+          'Your break has started', platformChannelSpecifics,
           payload: 'item x');
-      //
       await Future.delayed(Duration(seconds: duration));
       print('break over');
       showDialog(
@@ -291,11 +280,11 @@ class BreakState extends ConsumerState<Break> {
                                     child: Text('Break 1'),
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 50,
                                   height: 20,
                                   child: Row(children: [
-                                    Container(
+                                    SizedBox(
                                         width: 17,
                                         height: 10,
                                         child: TextField()),
@@ -303,7 +292,7 @@ class BreakState extends ConsumerState<Break> {
                                         padding:
                                             EdgeInsets.symmetric(horizontal: 1),
                                         child: Text(':')),
-                                    Container(
+                                    SizedBox(
                                       child: TextField(),
                                       width: 25,
                                       height: 10,
@@ -320,7 +309,7 @@ class BreakState extends ConsumerState<Break> {
                                     height: 30,
                                     child: Text('Duration 1')),
                               ),
-                              Container(
+                              SizedBox(
                                   //alignment: Alignment.centerLeft,
                                   width: 80,
                                   height: 30,
