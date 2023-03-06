@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'reusablecard.dart';
@@ -48,104 +49,100 @@ class EyeBreakState extends ConsumerState<EyeBreak> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ReusableCard(
-          settingTitle: 'Eye Break',
-          content: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                    height: 40,
-                    child: Text('Time between notifications',
-                        style: TextStyle(
-                            color:
-                                ref.watch(personalizationProvider).textColor)),
-                  )),
-                  Container(
-                      width: 80,
-                      height: 20,
-                      child: TextField(
-                        onSubmitted: (value) async {
-                          print('$value');
-                          int frequencyValue = int.parse(value);
-                          frequency = frequencyValue;
-                          eyeBreakTimer();
-                          // while (eyeBreakActive) {
-                          //   await Future.delayed(Duration(seconds: frequencyValue));
-                          //   print('Eye break started');
-                          //   await Future.delayed(Duration(seconds: 20));
-                          //   print('Eye break ended');
-                          // }
-                        },
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'[0123456789]'))
-                        ],
-                        controller: eyeBreakDuration,
-                        style: TextStyle(
-                            color:
-                                ref.watch(personalizationProvider).textColor),
-                        cursorColor:
-                            ref.watch(personalizationProvider).textColor,
-                        decoration: InputDecoration(
-                            hintText: 'minutes',
-                            hintStyle: TextStyle(
-                                color: ref
-                                    .watch(personalizationProvider)
-                                    .accent2Color)),
-                      ))
-                ],
-              ),
-              Container(
-                child: Switch(
-                    value: eyeBreakActive,
-                    onChanged: (value) {
-                      setState(() {
-                        eyeBreakActive = value;
-                      });
-                      print('$eyeBreakActive');
-                      eyeBreakTimer();
-                    }),
-              )
-              Expanded(
-                  child: SizedBox(
-                height: 40,
-                child: Text('Time between notifications',
-                    style: TextStyle(
-                        color: ref.watch(personalizationProvider).textColor)),
-              )),
-              SizedBox(
-                  width: 80,
-                  height: 20,
-                  child: TextField(
-                    onSubmitted: (value) async {
-                      print(value);
-                      int frequency = int.parse(value);
-                      while (eyeBreakActive) {
-                        await Future.delayed(Duration(seconds: frequency));
-                        print('Eye break started');
-                        await Future.delayed(const Duration(seconds: 20));
-                        print('Eye break ended');
-                      }
-                    },
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
-                    ],
-                    controller: eyeBreakDuration,
-                    style: TextStyle(
-                        color: ref.watch(personalizationProvider).textColor),
-                    cursorColor: ref.watch(personalizationProvider).textColor,
-                    decoration: InputDecoration(
-                        hintText: 'minutes',
-                        hintStyle: TextStyle(
-                            color: ref
-                                .watch(personalizationProvider)
-                                .accent2Color)),
-                  ))
-            ],
-          )),
-    );
+    return ReusableCard(
+        settingTitle: 'Eye Break',
+        content: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: SizedBox(
+                  height: 40,
+                  child: Text('Time between notifications',
+                      style: TextStyle(
+                          color:
+                              ref.watch(personalizationProvider).textColor)),
+                )),
+                SizedBox(
+                    width: 80,
+                    height: 20,
+                    child: TextField(
+                      onSubmitted: (value) async {
+                        print('$value');
+                        int frequencyValue = int.parse(value);
+                        frequency = frequencyValue;
+                        eyeBreakTimer();
+                        // while (eyeBreakActive) {
+                        //   await Future.delayed(Duration(seconds: frequencyValue));
+                        //   print('Eye break started');
+                        //   await Future.delayed(Duration(seconds: 20));
+                        //   print('Eye break ended');
+                        // }
+                      },
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0123456789]'))
+                      ],
+                      controller: eyeBreakDuration,
+                      style: TextStyle(
+                          color:
+                              ref.watch(personalizationProvider).textColor),
+                      cursorColor:
+                          ref.watch(personalizationProvider).textColor,
+                      decoration: InputDecoration(
+                          hintText: 'minutes',
+                          hintStyle: TextStyle(
+                              color: ref
+                                  .watch(personalizationProvider)
+                                  .accent2Color)),
+                    ))
+              ],
+            ),
+            Switch(
+                value: eyeBreakActive,
+                onChanged: (value) {
+                  setState(() {
+                    eyeBreakActive = value;
+                  });
+                  print('$eyeBreakActive');
+                  eyeBreakTimer();
+                }),
+            Expanded(
+                child: SizedBox(
+              height: 40,
+              child: Text('Time between notifications',
+                  style: TextStyle(
+                      color: ref.watch(personalizationProvider).textColor)),
+            )),
+            SizedBox(
+                width: 80,
+                height: 20,
+                child: TextField(
+                  onSubmitted: (value) async {
+                    print(value);
+                    int frequency = int.parse(value);
+                    while (eyeBreakActive) {
+                      await Future.delayed(Duration(seconds: frequency));
+                      print('Eye break started');
+                      await Future.delayed(const Duration(seconds: 20));
+                      print('Eye break ended');
+                    }
+                  },
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0123456789]'))
+                  ],
+                  controller: eyeBreakDuration,
+                  style: TextStyle(
+                      color: ref.watch(personalizationProvider).textColor),
+                  cursorColor: ref.watch(personalizationProvider).textColor,
+                  decoration: InputDecoration(
+                      hintText: 'minutes',
+                      hintStyle: TextStyle(
+                          color: ref
+                              .watch(personalizationProvider)
+                              .accent2Color)),
+                ))
+          ],
+        ));
   }
 }
