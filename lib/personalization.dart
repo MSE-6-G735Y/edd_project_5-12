@@ -1,6 +1,7 @@
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'reusablecard.dart';
 
 //import 'backgroundcolor.dart';
@@ -109,20 +110,17 @@ class PersonalizationState extends ConsumerState<Personalization> {
         Row(
           children: [
             Expanded(
-              child: Container(
-                  child: Text(
+              child: Text(
                 'Accent Color 2',
                 style: TextStyle(
-                    color: ref.watch(personalizationProvider).textColor),
-              )),
+                color: ref.watch(personalizationProvider).textColor),
+              ),
             ),
-            Container(
+            SizedBox(
               height: 40,
               child: DropdownButton(
-                icon: Container(
-                  child: Icon(Icons.arrow_drop_down,
-                      color: ref.watch(personalizationProvider).accent2Color),
-                ),
+                icon: Icon(Icons.arrow_drop_down,
+                    color: ref.watch(personalizationProvider).accent2Color),
                 value: dropdownValueAccent2,
                 items: accentcolor2List
                     .map<DropdownMenuItem<Color>>((Color value) {
@@ -158,10 +156,8 @@ class PersonalizationState extends ConsumerState<Personalization> {
             SizedBox(
                 height: 40,
                 child: DropdownButton(
-                  icon: Container(
-                    child: Icon(Icons.arrow_drop_down,
-                        color: ref.watch(personalizationProvider).accent2Color),
-                  ),
+                  icon: Icon(Icons.arrow_drop_down,
+                      color: ref.watch(personalizationProvider).accent2Color),
                   value: dropdownValueBackground,
                   items: backgroundcolorList
                       .map<DropdownMenuItem<Color>>((Color value) {
@@ -189,21 +185,17 @@ class PersonalizationState extends ConsumerState<Personalization> {
         Row(
           children: [
             Expanded(
-              child: Container(
-                child: Text(
-                  'Text Color',
-                  style: TextStyle(
-                      color: ref.watch(personalizationProvider).textColor),
-                ),
+              child: Text(
+                'Text Color',
+                style: TextStyle(
+                    color: ref.watch(personalizationProvider).textColor),
               ),
             ),
-            Container(
+            SizedBox(
               height: 40,
               child: DropdownButton(
-                icon: Container(
-                  child: Icon(Icons.arrow_drop_down,
-                      color: ref.watch(personalizationProvider).accent2Color),
-                ),
+                icon: Icon(Icons.arrow_drop_down,
+                    color: ref.watch(personalizationProvider).accent2Color),
                 value: dropdownValueText,
                 items:
                     textcolorList.map<DropdownMenuItem<Color>>((Color value) {

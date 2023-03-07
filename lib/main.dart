@@ -4,15 +4,34 @@
 import 'package:eddproject/providers.dart';
 import 'package:eddproject/shutoffdevice.dart';
 import 'package:flutter/material.dart';
-//importing lib dart files
-import 'personalization.dart';
-import 'about.dart';
-import 'break.dart';
-import 'nightlight.dart';
-import 'eyebreak.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() => runApp(ProviderScope(child: MyApp()));
+import 'about.dart';
+import 'break.dart';
+import 'eyebreak.dart';
+import 'nightlight.dart';
+//importing lib dart files
+import 'personalization.dart';
+
+////////// local notification setup ///////////////////////////////////////////////////
+
+final navigatorKey = GlobalKey<NavigatorState>();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  const InitializationSettings initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+  return runApp(const ProviderScope(child: MyApp()));
+}
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -39,9 +58,10 @@ class _MyAppState extends ConsumerState<MyApp> {
                   ref.watch(personalizationProvider).backgroundColor,
               shadowColor: ref.watch(personalizationProvider).backgroundColor),
           primarySwatch: Colors.blue,
-          textTheme: TextTheme(headline1: TextStyle(color: Colors.black))),
+          textTheme:
+              const TextTheme(displayLarge: TextStyle(color: Colors.black))),
       // A widget which will be started on application startup
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -76,44 +96,44 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,
-              margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+              margin: const EdgeInsets.fromLTRB(20, 8, 20, 0),
             ),
-            Break(),
+            const Break(),
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            ShutOffDeviceTile(),
+            const ShutOffDevice(),
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            NightLight(),
+            const NightLight(),
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            EyeBreak(),
+            const EyeBreak(),
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            Personalization(),
+            const Personalization(),
             Container(
               height: 1.0,
               color: ref.watch(personalizationProvider).accent2Color,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            About(),
+            const About(),
             Container(
                 height: 1,
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 color: ref.watch(personalizationProvider).accent2Color),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             //Container(
