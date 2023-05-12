@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PersonalizationProvider extends ChangeNotifier {
   //listing all the variables that will affect something outside of the personalization file
@@ -6,12 +7,14 @@ class PersonalizationProvider extends ChangeNotifier {
   Color accent2Color;
   Color backgroundColor;
   Color textColor;
-  //gives each variable a default value because they needs it.
+  var textFont;
+  //gives each variable a default value because they need it.
   PersonalizationProvider({
     this.accentColor = Colors.blue,
     this.accent2Color = Colors.grey,
     this.backgroundColor = Colors.white,
     this.textColor = Colors.black,
+    this.textFont = GoogleFonts.gantari,
   });
 
   void setAccentColor(Color newColor) {
@@ -32,6 +35,11 @@ class PersonalizationProvider extends ChangeNotifier {
 
   void setTextColor(Color newColor) {
     textColor = newColor;
+    notifyListeners();
+  }
+
+  void setTextFont(newFont) {
+    textFont = newFont;
     notifyListeners();
   }
 }

@@ -1,6 +1,8 @@
+import 'package:eddproject/main.dart';
 import 'package:eddproject/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'reusablecard.dart';
 
@@ -11,6 +13,15 @@ import 'reusablecard.dart';
 //
 //Changing the first color requires you to change the value of its
 //corresponding variable in personalization_provider
+//
+//Font
+//
+List fontsList = [
+  GoogleFonts.gantari,
+  GoogleFonts.courierPrime,
+  GoogleFonts.playfairDisplay,
+];
+var dropdownValueFont = fontsList.first;
 //
 //Text Color
 //
@@ -60,6 +71,7 @@ class PersonalizationState extends ConsumerState<Personalization> {
   @override
   Widget build(BuildContext context) {
     return ReusableCard(
+      toggleSwitch: SizedBox(),
       settingTitle: 'Personalization',
       content: Column(children: [
         Row(children: [
@@ -68,13 +80,15 @@ class PersonalizationState extends ConsumerState<Personalization> {
             height: 20,
             child: Text(
               'Accent Color',
-              style: TextStyle(
-                  color: ref.watch(personalizationProvider).textColor),
+              style: ref.watch(personalizationProvider).textFont(
+                  textStyle: TextStyle(
+                      color: ref.watch(personalizationProvider).textColor)),
             ),
           )),
           SizedBox(
             height: 40,
             child: DropdownButton<Color>(
+              dropdownColor: ref.watch(personalizationProvider).backgroundColor,
               alignment: Alignment.centerRight,
               icon: Container(
                 child: Icon(Icons.arrow_drop_down,
@@ -112,13 +126,16 @@ class PersonalizationState extends ConsumerState<Personalization> {
             Expanded(
               child: Text(
                 'Accent Color 2',
-                style: TextStyle(
-                color: ref.watch(personalizationProvider).textColor),
+                style: ref.watch(personalizationProvider).textFont(
+                    textStyle: TextStyle(
+                        color: ref.watch(personalizationProvider).textColor)),
               ),
             ),
             SizedBox(
               height: 40,
               child: DropdownButton(
+                dropdownColor:
+                    ref.watch(personalizationProvider).backgroundColor,
                 icon: Icon(Icons.arrow_drop_down,
                     color: ref.watch(personalizationProvider).accent2Color),
                 value: dropdownValueAccent2,
@@ -149,13 +166,16 @@ class PersonalizationState extends ConsumerState<Personalization> {
             Expanded(
               child: Text(
                 'Background Color',
-                style: TextStyle(
-                    color: ref.watch(personalizationProvider).textColor),
+                style: ref.watch(personalizationProvider).textFont(
+                    textStyle: TextStyle(
+                        color: ref.watch(personalizationProvider).textColor)),
               ),
             ),
             SizedBox(
                 height: 40,
                 child: DropdownButton(
+                  dropdownColor:
+                      ref.watch(personalizationProvider).backgroundColor,
                   icon: Icon(Icons.arrow_drop_down,
                       color: ref.watch(personalizationProvider).accent2Color),
                   value: dropdownValueBackground,
@@ -187,13 +207,16 @@ class PersonalizationState extends ConsumerState<Personalization> {
             Expanded(
               child: Text(
                 'Text Color',
-                style: TextStyle(
-                    color: ref.watch(personalizationProvider).textColor),
+                style: ref.watch(personalizationProvider).textFont(
+                    textStyle: TextStyle(
+                        color: ref.watch(personalizationProvider).textColor)),
               ),
             ),
             SizedBox(
               height: 40,
               child: DropdownButton(
+                dropdownColor:
+                    ref.watch(personalizationProvider).backgroundColor,
                 icon: Icon(Icons.arrow_drop_down,
                     color: ref.watch(personalizationProvider).accent2Color),
                 value: dropdownValueText,
@@ -219,6 +242,44 @@ class PersonalizationState extends ConsumerState<Personalization> {
             ),
           ],
         ),
+        Row(
+          children: [
+            Expanded(
+              child: Text('Font',
+                  style: ref.watch(personalizationProvider).textFont(
+                      textStyle: TextStyle(
+                          color:
+                              ref.watch(personalizationProvider).textColor))),
+            ),
+            SizedBox(
+              height: 40,
+              child: DropdownButton(
+                dropdownColor:
+                    ref.watch(personalizationProvider).backgroundColor,
+                icon: Icon(Icons.arrow_drop_down,
+                    color: ref.watch(personalizationProvider).accent2Color),
+                value: dropdownValueFont,
+                items: fontsList.map<DropdownMenuItem<dynamic>>((value) {
+                  return DropdownMenuItem<dynamic>(
+                    value: value,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 5),
+                      height: 20.0,
+                      width: 70.0,
+                      child: Text('Example', style: value()),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (dynamic? value) {
+                  setState(() {
+                    dropdownValueFont = value!;
+                    ref.read(personalizationProvider).setTextFont(value);
+                  });
+                },
+              ),
+            ),
+          ],
+        )
       ]),
     );
   }

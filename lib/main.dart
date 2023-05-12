@@ -13,6 +13,7 @@ import 'eyebreak.dart';
 import 'nightlight.dart';
 //importing lib dart files
 import 'personalization.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ////////// local notification setup ///////////////////////////////////////////////////
 
@@ -58,8 +59,11 @@ class _MyAppState extends ConsumerState<MyApp> {
                   ref.watch(personalizationProvider).backgroundColor,
               shadowColor: ref.watch(personalizationProvider).backgroundColor),
           primarySwatch: Colors.blue,
-          textTheme:
-              const TextTheme(displayLarge: TextStyle(color: Colors.black))),
+          // fontFamily: GoogleFonts.courierPrime().fontFamily,
+          // fontFamily: GoogleFonts.gantari().fontFamily,
+          //GoogleFonts.playfairDisplay().fontFamily,
+          textTheme: TextTheme(displayLarge: TextStyle(color: Colors.black))),
+      //inside of TextTheme: displayLarge: TextStyle(color: Colors.black)
       // A widget which will be started on application startup
       home: const MyHomePage(),
     );

@@ -11,11 +11,16 @@ import 'main.dart';
 // }
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({super.key, required this.settingTitle, required this.content});
+  ReusableCard(
+      {super.key,
+      required this.settingTitle,
+      required this.content,
+      required this.toggleSwitch});
   //String settingTitle;
   //
   String settingTitle;
   Widget content;
+  Widget toggleSwitch;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -42,10 +47,9 @@ class ReusableCard extends StatelessWidget {
               ),
             ))),
             Container(
-              alignment: Alignment.topRight,
-              width: 50.0,
-              child: const ToggleSwitch(),
-            )
+                alignment: Alignment.topRight, width: 50.0, child: toggleSwitch
+                //const ToggleSwitch(),
+                )
           ])),
       // Container(
       //   height: 1.0,

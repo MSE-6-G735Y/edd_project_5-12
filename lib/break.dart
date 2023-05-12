@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'reusablecard.dart';
 
@@ -29,30 +30,36 @@ class BreakState extends ConsumerState<Break> {
   int duration = 0;
   bool isBreakOn = false;
   int frequency = 0;
+  var font = GoogleFonts.gantari;
 
+  //Turns on break scheculing thing
+  //if either duration or frequency is 0, the timer does not start, otherwise it would send commands instantaneously
   void timer() async {
-    while (isBreakOn) {
-      await Future.delayed(Duration(seconds: frequency));
-      print('break started');
-      //
+    if (duration == 0 || frequency == 0) {
+    } else {
+      while (isBreakOn) {
+        await Future.delayed(Duration(minutes: frequency));
+        print('break started');
+        //
 
-      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-          'your channel id', 'your channel name',
-          channelDescription: 'your channel description',
-          importance: Importance.max,
-          priority: Priority.high,
-          ticker: 'ticker');
-      var platformChannelSpecifics =
-          NotificationDetails(android: androidPlatformChannelSpecifics);
-      await flutterLocalNotificationsPlugin.show(0, 'Your break has started',
-          'Your break has started', platformChannelSpecifics,
-          payload: 'item x');
-      await Future.delayed(Duration(seconds: duration));
-      print('break over');
-      showDialog(
-          context: context,
-          builder: (BuildContext context) =>
-              AlertDialog(title: Text('Your Break has Ended')));
+        var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+            'your channel id', 'your channel name',
+            channelDescription: 'your channel description',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker');
+        var platformChannelSpecifics =
+            NotificationDetails(android: androidPlatformChannelSpecifics);
+        await flutterLocalNotificationsPlugin.show(0, 'Your break has started',
+            'Your break has started', platformChannelSpecifics,
+            payload: 'item x');
+        await Future.delayed(Duration(minutes: duration));
+        print('break over');
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                AlertDialog(title: Text('Your Break has Ended')));
+      }
     }
   }
 
@@ -60,6 +67,17 @@ class BreakState extends ConsumerState<Break> {
   Widget build(BuildContext context) {
     return Container(
       child: ReusableCard(
+        toggleSwitch: Switch(
+            activeColor: ref.watch(personalizationProvider).accentColor,
+            inactiveTrackColor: ref.watch(personalizationProvider).accent2Color,
+            value: isBreakOn,
+            onChanged: (value) {
+              setState(() {
+                isBreakOn = value;
+              });
+              print('$isBreakOn');
+              timer();
+            }),
         settingTitle: 'Break',
         content: Column(
           children: [
@@ -70,12 +88,18 @@ class BreakState extends ConsumerState<Break> {
                         alignment: Alignment.centerLeft,
                         height: 30,
                         //color: Colors.red,
-                        child: Text(
-                          'Frequency',
-                          style: TextStyle(
-                              color:
-                                  ref.watch(personalizationProvider).textColor),
-                        ))),
+                        child: Text('Frequency',
+                            style: ref.watch(personalizationProvider).textFont(
+                                textStyle: TextStyle(
+                                    color: ref
+                                        .watch(personalizationProvider)
+                                        .textColor))
+                            // style: GoogleFonts.ref.watch(personalizationProvider).textFont(
+                            //     textStyle: TextStyle(
+                            //         color: ref
+                            //             .watch(personalizationProvider)
+                            //             .textColor)),
+                            ))),
                 Container(
                   alignment: Alignment.centerLeft,
                   width: 80,
@@ -186,9 +210,11 @@ class BreakState extends ConsumerState<Break> {
                     height: 30,
                     //color: Colors.green,
                     child: Text('Duration',
-                        style: TextStyle(
-                            color:
-                                ref.watch(personalizationProvider).textColor)),
+                        style: ref.watch(personalizationProvider).textFont(
+                            textStyle: TextStyle(
+                                color: ref
+                                    .watch(personalizationProvider)
+                                    .textColor))),
                   ),
                 ),
                 Container(
@@ -253,9 +279,11 @@ class BreakState extends ConsumerState<Break> {
                     alignment: Alignment.centerLeft,
                     height: 30,
                     child: Text('Add Specific Break',
-                        style: TextStyle(
-                            color:
-                                ref.watch(personalizationProvider).textColor)),
+                        style: ref.watch(personalizationProvider).textFont(
+                            textStyle: TextStyle(
+                                color: ref
+                                    .watch(personalizationProvider)
+                                    .textColor))),
                   ),
                 ),
                 Container(

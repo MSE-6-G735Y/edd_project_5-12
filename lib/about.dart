@@ -20,13 +20,18 @@ class AboutState extends ConsumerState<About> {
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
               child: Text(
                   'This app\'s features intend to help the user avoid the effects of extended and uniterrupted use of devices. Options for breaks, device shut of times and night lights can help combat digital eye strain by encouraging breaks during device use and limiting the effects of blue light. ',
-                  style: TextStyle(
-                      color: ref.watch(personalizationProvider).textColor)),
+                  style: ref.watch(personalizationProvider).textFont(
+                      textStyle: TextStyle(
+                          color:
+                              ref.watch(personalizationProvider).textColor))),
             )
           ],
-          title: const Text(
+          title: Text(
             'About',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: ref.watch(personalizationProvider).textFont(
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: ref.watch(personalizationProvider).textColor)),
           )),
     );
   }
